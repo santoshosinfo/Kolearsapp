@@ -101,6 +101,12 @@ function getprodcutdetails()
 	$.getJSON(serviceURL + 'subcategoryproductimg.php?id='+subp1.p_id, function(datap) {
 	var gallerimage = datap.items;
 	console.log(gallerimage);
+	$.each(gallerimage,function(index,gallimg)){
+	gp += '<li><a href="images/cnc_jodi/1/"'+gallimg.pimg_name+'" title="'+subp1.product_name+'">';
+	gp +='<img src="images/cnc_jodi/1/"'+gallimg.pimg_name+'"title="'+subp1.product_name+'" alt="'+subp1.product_name+'" /></a></li>';
+	});
+	});
+	gp += '<div class="clear"></div>';
 	
 	});
 	});
