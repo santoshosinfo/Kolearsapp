@@ -32,7 +32,7 @@ var serviceURL = "http://localhost/android/kolears/";
 
 var category;
 
-alert(serviceURL);
+//alert(serviceURL);
 getonecatdetails();
 getprodcutdetails();
 getcategorylist();
@@ -42,39 +42,30 @@ function getcategorylist() {
 	//alert(data);
 	category = data.items;
 	//alert(category);
-	console.log(category);
+	//console.log(category);
 	$.each(category, function(index, catg) {
-		var cat_html ='<a class="menu-item menu-icon img" id="sub-menu-one" href="#">'+catg.cat_name+'</a>';
+		var cat_html = '<a class="menu-item menu-icon img" id="sub-menu-one" href="#">'+catg.cat_name+'</a>';
 		
 	$.getJSON(serviceURL + 'subcategory.php?id='+catg.cat_id, function(data1){
 			
 			var sub_cat = data1.items;
-			console.log(sub_cat);
-			
-			if (sub_cat.length !== 0) {
+			//console.log(sub_cat);
+			//var cat_html = '<a class="menu-item menu-icon img" id="sub-menu-one" href="#">'+catg.cat_name+'</a>';
+			if (sub_cat.length !==0) {
 			
 			//cat_html+='<strong></strong>';
-			cat_html+='<div class="sub-menu-one">';
+			cat_html += '<div class="sub-menu-one">';
 			$.each(sub_cat, function(index, subcatg) {
 			
-			cat_html+= '<a href="#" class="sub-menu-item">'+subcatg.cat_name+'</a>';
-			
-			
-			
+			cat_html += '<a href="#" class="sub-menu-item">'+subcatg.cat_name+'</a>';
 			
 			
 			});
 			
-			cat_html+='</div>';
+			cat_html += '</div>';
 			
-			
-			
-}
-
-	
-			
+}	
 		});
-		
 		
 		//alert(cat_html);
 		console.log(cat_html);
@@ -91,28 +82,30 @@ function getprodcutdetails()
 {
 	$.getJSON(serviceURL + 'subcategoryproduct.php', function(data) {
 	subproduct = data.items;
-	alert(subproduct);
+	//alert(subproduct);
 	var subp = '<h3 class="left-text">';
 	$.each(subproduct, function(index, subp1) {
 	
 	subp +='<a href="#">'+ subp1.product_name+'</a>'+',';
-	var gp ='<h4 id="cnc_jodi">'+subp1.product_name+'</h4>';
+
 	
 	$.getJSON(serviceURL + 'subcategoryproductimg.php?id='+subp1.p_id, function(datap) {
+	var gp ='<h4 id="cnc_jodi">'+subp1.product_name+'</h4>';
 	var gallerimage = datap.items;
-	console.log(gallerimage);
-	$.each(gallerimage,function(index,gallimg)){
-	gp += '<li><a href="images/cnc_jodi/1/"'+gallimg.pimg_name+'" title="'+subp1.product_name+'">';
-	gp +='<img src="images/cnc_jodi/1/"'+gallimg.pimg_name+'"title="'+subp1.product_name+'" alt="'+subp1.product_name+'" /></a></li>';
+	//console.log(gallerimage);
+	$.each(gallerimage,function(index,gallimg){
+	gp += '<li><a href="images/cnc_jodi/1/'+gallimg.pimg_name+'title="'+subp1.product_name+'">';
+	gp +='<img src="images/cnc_jodi/1/'+gallimg.pimg_name+'" title="'+subp1.product_name+'" alt="'+subp1.product_name+'" /></a></li>';
+
 	});
-	});
-	
 	gp += '<div class="clear"></div>';
-	
+	//console.log(gp);
+	$('#gallery').append(gp);
 	});
+	
 	});
 	subp += '</h3>';
-	console.log(subp);
+	//console.log(subp);
 	$('#product_title').append(subp);
 	});
 	
@@ -123,7 +116,7 @@ function getonecatdetails()
 {
 	$.getJSON(serviceURL + 'onecategory.php', function(data) {
 	onecategory = data.items;
-	alert(onecategory);
+	//alert(onecategory);
 	$.each(onecategory, function(index, catg1) {
 	$("#cat_name").append('	<h1 class="page-title-small" >'+catg1.cat_name+'</h1>');
 	
