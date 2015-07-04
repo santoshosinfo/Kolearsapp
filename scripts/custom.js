@@ -48,7 +48,7 @@ getcategorylist();
 function getcategorylist() {
 var subcat_html;
 //var cat_url ='http://localhost/android/Kolearsapp/';
-var cat_url='http://k2s2c.in/kolears/services/details.php?id=';
+var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 	$.getJSON(serviceURL + 'category.php', function(data) {
 	//alert(data);
 	category = data.items;
