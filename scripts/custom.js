@@ -27,50 +27,73 @@
 
 
 $(document).ready(function(){
-var serviceURL = "http://k2s2c.in/kolears/services/";
+//var serviceURL = "http://k2s2c.in/kolears/services/";
 //var serviceURL = "http://santosh.phpzeal.com/kolears/";
-//var serviceURL = "http://localhost/android/kolears/";
+var serviceURL = "http://localhost/android/kolears/";
 
 var category;
-
+var sub_cat;
 //alert(serviceURL);
-getonecatdetails();
-getprodcutdetails();
+//alert('hi');
+$('#catlist').on('click','.maincat',function()
+{
+	//alert('hi');
+	$(this).next('.sub-menu-one').toggle();
+});
+
+
+
+
 getcategorylist();
 function getcategorylist() {
-
+var subcat_html;
+var cat_url ='http://localhost/android/Kolearsapp/';
+var cat_url='http://k2s2c.in/kolears/services/details.php?id=';
 	$.getJSON(serviceURL + 'category.php', function(data) {
 	//alert(data);
 	category = data.items;
 	//alert(category);
 	//console.log(category);
+	
 	$.each(category, function(index, catg) {
-		var cat_html = '<a class="menu-item menu-icon img" id="sub-menu-one" href="#">'+catg.cat_name+'</a>';
+		 //var cat_html = '<a class="menu-item menu-icon img" id="sub-menu-one" href="#">'+catg.cat_name+'</a>';
 		
 	$.getJSON(serviceURL + 'subcategory.php?id='+catg.cat_id, function(data1){
 			
-			var sub_cat = data1.items;
+			sub_cat = data1.items;
 			//console.log(sub_cat);
 			//var cat_html = '<a class="menu-item menu-icon img" id="sub-menu-one" href="#">'+catg.cat_name+'</a>';
-			if (sub_cat.length !==0) {
 			
+			if (sub_cat.length !==0) {
+			var cat_html = '<a class="menu-item menu-icon img maincat" id="sub-menu-one"  href="#">'+catg.cat_name+'<strong></strong></a>';
+				
 			//cat_html+='<strong></strong>';
-			cat_html += '<div class="sub-menu-one">';
+			subcat_html = '<div class="sub-menu-one">';
 			$.each(sub_cat, function(index, subcatg) {
 			
-			cat_html += '<a href="#" class="sub-menu-item">'+subcatg.cat_name+'</a>';
+			subcat_html += '<a href="'+cat_url+subcatg.cat_id+'-'+subcatg.parent_cat_id+'" class="sub-menu-item">'+subcatg.cat_name+'</a>';
 			
 			
 			});
 			
-			cat_html += '</div>';
+			subcat_html += '</div>';
 			
-}	
+}
+else{
+subcat_html = '';
+var cat_html = '<a class="menu-item menu-icon img" id="sub-menu-one" href="'+cat_url+catg.cat_id+'">'+catg.cat_name+'</a>';
+
+}
+		//console.log(subcat_html);
+		//cat_html += subcat_html;
+		var fcat = cat_html+subcat_html;
+		console.log(fcat);
+		$('#catlist').append(fcat);
 		});
 		
+		
 		//alert(cat_html);
-		console.log(cat_html);
-		$('#catlist').append(cat_html);
+		
 	});
 	
 	 
@@ -81,6 +104,7 @@ function getcategorylist() {
 }
 function getprodcutdetails()
 {
+	var imgURL = "http://localhost/tgc1/uploads/";
 	$.getJSON(serviceURL + 'subcategoryproduct.php', function(data) {
 	subproduct = data.items;
 	//alert(subproduct);
@@ -95,8 +119,8 @@ function getprodcutdetails()
 	var gallerimage = datap.items;
 	//console.log(gallerimage);
 	$.each(gallerimage,function(index,gallimg){
-	gp += '<li><a href="images/cnc_jodi/1/'+gallimg.pimg_name+'title="'+subp1.product_name+'">';
-	gp +='<img src="images/cnc_jodi/1/'+gallimg.pimg_name+'" title="'+subp1.product_name+'" alt="'+subp1.product_name+'" /></a></li>';
+	gp += '<li><a href="'+imgURL+'eventfile-'+gallimg.p_id+'-'+gallimg.p_img_id+'-'+gallimg.pimg_name+'" title="'+subp1.product_name+'">';
+	gp +='<img src="'+imgURL+'eventfile-'+gallimg.p_id+'-'+gallimg.p_img_id+'-'+gallimg.pimg_name+'" title="'+subp1.product_name+'" alt="'+subp1.product_name+'" /></a></li>';
 
 	});
 	gp += '<div class="clear"></div>';
@@ -115,7 +139,7 @@ function getprodcutdetails()
 }
 function getonecatdetails()
 {
-	$.getJSON(serviceURL + 'onecategory.php', function(data) {
+	$.getJSON(serviceURL + 'onecategory.php',function(data) {
 	onecategory = data.items;
 	//alert(onecategory);
 	$.each(onecategory, function(index, catg1) {
@@ -128,6 +152,17 @@ function getonecatdetails()
 	});
 	
 	
+}
+function getUrlVars() {
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
 }
 
 
