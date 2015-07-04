@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<link rel="apple-touch-icon" sizes="114x114" href="images/splash/splash-icon.png"> 
+<link rel="apple-touch-startup-image" href="images/splash/splash-screen.png" media="screen and (max-device-width: 320px)" /> 
+<link rel="apple-touch-startup-image" href="images/splash/splash-screen_402x.png" media="(max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2)" /> 
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-itunes-app" content="app-id=284882215, app-argument=x-sfp:///visit/seal-rocks">
+
+<title>Kolears</title>
+
+<link href="style/style.css" rel="stylesheet" type="text/css">
+<link href="style/buttons.css" rel="stylesheet" type="text/css">
+<link href="style/photoswipe.css" rel="stylesheet" type="text/css">
+<link href="style/retina.css" media="only screen and (-webkit-min-device-pixel-ratio: 2)" rel="stylesheet" />
+<link href="style/add2home.css" rel="stylesheet" type="text/css">
+
+
+<script src="scripts/klass.min.js"></script>
+<script src="scripts/jquery.js"></script>
+<script src="scripts/touchSwipe.js"></script>
+<script src="scripts/photoswipe.js"></script>
+<script src="scripts/roundabout.js"></script>
+<script src="scripts/contact.js"></script>
+<script src="scripts/retina.js"></script>
+<script src="scripts/add2home.js"></script>
+<script src="scripts/custom.js"></script>
+
+</head>
+
+<body onload="touchScroll('scrollMe')">
+
+<div class="content">
+	<div class="header">
+    	<a href="#" class="deploy-nav header-icon"></a>
+        <a href="#" class="hide-nav header-icon-active"></a>
+    	<h1 class="page-title-small">SWIPE ME TO THE RIGHT</h1>
+    </div>
+    <p class="center-text"><img src="images/logo.png" alt="img" width="217" class="replace-2x logo"></p>
+    
+  
+	<ul class="image-slider">
+		<li>
+        	<span><img class="responsive-image" src="images/slider/001.png" alt="img"></span>
+       	</li>
+		<li>
+        	<span><img class="responsive-image" src="images/slider/002.png" alt="img"></span>
+        </li>
+		<li>
+        	<span><img class="responsive-image" src="images/slider/003.png" alt="img"></span>
+        </li>
+		<li>
+        	<span><img class="responsive-image" src="images/slider/004.png" alt="img"></span>
+        </li>
+		<li>
+        	<span><img class="responsive-image" src="images/slider/005.png" alt="img"></span>
+        </li>
+	</ul>
+    
+    
+    <h2 class="center-text slider-heading-two">Welcome to Kolears</h2>
+    
+    <div class="decoration"></div>
+	
+    <p class="center-text slider-heading-three">
+        Kolears is one of the most trusted jeweller serving its clients since 60 year .<br/>
+        Kolears is reputed for its world class quality gold and gemstones embellished with most authentic jewellery design.<br/>
+        
+    </p>
+   
+   <div class="decoration"></div>
+   
+   <p class="center-text slider-heading-three"><img src="images/940-x-145.png" alt="Explore various shades of life with K’olears - The jewel of you life." title="Explore various shades of life with K’olears - The jewel of you life."></p>
+   
+   <div class="decoration"></div>
+   <p class="center-text copyright">Copyright 2015. All rights reserved</p>
+   
+</div>
+
+<div class="sidebar">
+	<div class="sidebar-hide-scroll" id="scrollMe">
+	<div class="sidebar-header">
+		<h1 class="sidebar-title"><a href="index.html">K'olears</a></h1>
+    </div>
+    
+   
+    <a class="menu-item menu-icon img" id="sub-menu-one" href="#">Bangles<strong></strong></a>    	
+		<div class="sub-menu-one">
+			<a href="cnc_bangles.html" class="sub-menu-item">CNC Bangles</a>
+			<a href="lp_bangle.html" class="sub-menu-item">Ladies Plain Bangles</a>
+			<a href="swarovski_bangles.html" class="sub-menu-item">Swarovski Bangles</a>
+		</div>
+	<a href="gent_bracelet.html" class="menu-item menu-icon img">Gents Bracelet</a>
+	<a href="ladie_bracelet.html" class="menu-item menu-icon img">Ladies Bracelet</a>
+	<a href="ladie_necklace.html" class="menu-item menu-icon img">Ladies Antique Necklace</a>
+	<a href="ladie_ant_set.html" class="menu-item menu-icon img">Ladies Antique Set</a>
+	<a href="la_pendant_set.html" class="menu-item menu-icon img">Ladies Pendant Set</a>			
+	<a href="#" id="sub-menu-two" class="menu-item menu-icon img">Ladies Mangalsutra<strong></strong></a>
+		<div class="sub-menu-two">
+			<a href="la_plain_mang.html" class="sub-menu-item">Ladies Plain Mangalsutra</a>
+			<a href="la_swarovski_mang.html" class="sub-menu-item">Ladies Swarovski Mangalsutra</a>
+		</div>
+	<a href="ladie_gent_ring.html" class="menu-item menu-icon img">Ladies With Gents Ring</a>
+	<a href="gift_pendant_chain.html" class="menu-item menu-icon img">Gift Pedant With Chain</a><a href="temple_jewellery.html" class="menu-item menu-icon img">Temple Jewellery</a>
+	<a href="#" class="menu-item menu-icon img" id="sub-menu-three">Kid's Corner<strong></strong></a>
+		<div class="sub-menu-three">
+			<a href="baby_pendant_chain.html" class="sub-menu-item">Baby Pendant With Chain</a>
+			<a href="bacha_kadli.html" class="sub-menu-item">Bacha Kadli</a>
+			<a href="bacha_ring.html" class="sub-menu-item">Bacha Ring</a>
+		</div>	
+	
+    </div>
+</div>
+
+
+
+</body>
+</html>
+
