@@ -106,6 +106,7 @@ function getprodcutdetails()
 	gp +='<img src="images/cnc_jodi/1/"'+gallimg.pimg_name+'"title="'+subp1.product_name+'" alt="'+subp1.product_name+'" /></a></li>';
 	});
 	});
+	
 	gp += '<div class="clear"></div>';
 	
 	});
