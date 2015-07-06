@@ -1,7 +1,7 @@
 <?php
 #include 'kolears/config.php';
 #$conn = mysqli_connect("localhost",'root','','tgc');
-$conn = mysqli_connect("localhost",'root','','tgc');
+$conn = mysqli_connect("localhost",'k2s2c_kolears','H@*&2871','k2s2c_kolears');
 
 $id=$_GET["id"];
 if(strstr($id,'-'))

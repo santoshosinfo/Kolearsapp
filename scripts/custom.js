@@ -27,9 +27,9 @@
 
 
 $(document).ready(function(){
-//var serviceURL = "http://k2s2c.in/kolears/services/";
+var serviceURL = "http://k2s2c.in/kolears/services/";
 //var serviceURL = "http://santosh.phpzeal.com/kolears/";
-var serviceURL = "http://localhost/android/kolears/";
+//var serviceURL = "http://localhost/android/kolears/";
 
 var category;
 var sub_cat;
