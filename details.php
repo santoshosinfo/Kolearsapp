@@ -1,4 +1,22 @@
+<?php
+#include 'kolears/config.php';
+#$conn = mysqli_connect("localhost",'root','','tgc');
+$conn = mysqli_connect("localhost",'root','','tgc');
 
+$id=$_GET["id"];
+if(strstr($id,'-'))
+{
+	$id_exp =explode('-',$id);
+	$cat_id=$id_exp[1];
+	
+}
+else{
+$cat_id=$_GET["id"];
+$id='';
+}
+
+
+?>
 <!DOCTYPE html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -33,7 +51,17 @@
 	<div class="header">
     	<a href="#" class="deploy-nav header-icon"></a>
         <a href="#" class="hide-nav header-icon-active"></a>
-    	<h1 class="page-title-small">Bangles</h1>
+		<?php $q1 = "select cat_id,parent_cat_id,cat_name from  category where cat_id='$cat_id'";
+	$result = mysqli_query($conn,$q1);
+	
+	while($row = mysqli_fetch_array($result))
+	{
+		$cat_name =$row['cat_name'];
+		
+	}
+		
+	?>
+    	<h1 class="page-title-small"><?php echo $cat_name; ?></h1>
     </div>
     
  
@@ -42,14 +70,60 @@
     <div class="decoration"></div>
     
     <div class="container">
-    	<h3 class="left-text">Bangles:<a href="#cnc_jodi.">Cnc Jodi </a>, <a href="#cnc_jota">Cnc Jota </a>, <a href="#cnc_kada">Cnc Kada</a></h3>
+	<?php #$q1 = "select cat_id,parent_cat_id,cat_name from  category where cat_id='$cat_id'";
+	$q2 = "select p_id, product_name,cat_id,sub_cat_id from product_master where cat_id='$cat_id' and sub_cat_id='$id' order by p_id";
+	#echo $q2;
+	#exit;
+	$result1 = mysqli_query($conn,$q2);
+	
+	$title= '<h3 class="left-text">'.$cat_name.':&nbsp';
+	$linkimg = '';
+	#$path='http://localhost/tgc1/uploads/';
+	$path='http://k2s2c.in/kolears/uploads/';
+	
+	
+	while($row1 = mysqli_fetch_array($result1))
+	{
+		$prod_name =$row1['product_name'];
+		$p_id= $row1['p_id'];
+		
+		#$title1="<a href=\"#$prod_name\">$prod_name</a>,";
+		#$title1 ='subst'
+		$title.= "<a href=\"#$prod_name\">$prod_name</a>,";
+	$q2="select pimg_name,img_desc,p_img_id, p_id from product_imagemaster where p_id='$p_id' order by p_id";	
+		$resultimg = mysqli_query($conn,$q2);
+		$linkimg.='<h4 id="'.$prod_name.'">'.$prod_name.'</h4>';
+		while($rowimg = mysqli_fetch_array($resultimg))
+		{	
+			$img_name = $rowimg['pimg_name'];
+			$img_desc = $rowimg['img_desc'];
+			$pro_id =$rowimg['p_id'];
+			$p_img_id= $rowimg['p_img_id'];
+			$final_img = 'eventfile-'.$pro_id.'-'.$p_img_id.'-'.$img_name;
+		$linkimg.= '<li><a href="'.$path.$final_img.'" title="'.$img_desc.'"> 
+				<img src="'.$path.$final_img.'" title="'.$img_desc.'" alt="'.$img_desc.'" /> 
+			</a></li>';
+		
+			
+			
+		}
+		$linkimg.='<div class="clear"></div>';
+		
+		
+	}
+	$title .='</h3>';
+	
+	echo $title;	
+	?>
+    
     </div>
     
-    <div class="decoration"></div>
+    
     
 	<div class="container">
         <ul id="gallery" class="gallery">
-			<h4 id="cnc_jodi">Cnc Jodi</h4>
+		<?php echo $linkimg;?>
+			<!--<h4 id="cnc_jodi">Cnc Jodi</h4>
             <li><a href="images/cnc_jodi/1/cnc_jodi500.jpg" title="Cnc Jodi"> 
 				<img src="images/cnc_jodi/1/cnc_jodi500.jpg" title="Cnc Jodi" alt="Cnc Jodi" /> 
 			</a></li> 
@@ -86,7 +160,7 @@
 			<li><a href="images/cnc_jodi/12/cnc_jodi500.jpg" title="Cnc Jodi"> 
 				<img src="images/cnc_jodi/12/cnc_jodi500.jpg" title="Cnc Jodi" alt="Cnc Jodi" /> 
 			</a></li>
-			<div class="clear"></div>
+			
 			<h4 id="cnc_jota">Cnc Jota</h4>
 			<li><a href="images/cnc_jota/1/cnc_jota500.jpg" title="Cnc Jota"> 
 				<img src="images/cnc_jota/1/cnc_jota500.jpg" title="Cnc Jota" alt="Cnc Jota" /> 
@@ -134,7 +208,7 @@
 			</a></li>
 			<li><a href="images/cnc_kada/10/cnc_kada500.jpg" title="Cnc Kada">
 				<img src="images/cnc_kada/10/cnc_kada500.jpg" title="Cnc Kada" alt="Cnc Kada" /> 
-			</a></li>			
+			</a></li>-->			
          </ul>
 	</div>    
      
@@ -150,31 +224,12 @@
     <p class="sidebar-divider no-top">
     	
     </p>
+	<div id="catlist">
+		
+	
+	</div>
    
-    <a class="menu-item menu-icon img" id="sub-menu-one" href="#">Bangles<strong></strong></a>    	
-		<div class="sub-menu-one">
-			<a href="cnc_bangles.html" class="sub-menu-item">CNC Bangles</a>
-			<a href="lp_bangle.html" class="sub-menu-item">Ladies Plain Bangles</a>
-			<a href="swarovski_bangles.html" class="sub-menu-item">Swarovski Bangles</a>
-		</div>
-	<a href="gent_bracelet.html" class="menu-item menu-icon img">Gents Bracelet</a>
-	<a href="ladie_bracelet.html" class="menu-item menu-icon img">Ladies Bracelet</a>
-	<a href="ladie_necklace.html" class="menu-item menu-icon img">Ladies Antique Necklace</a>
-	<a href="ladie_ant_set.html" class="menu-item menu-icon img">Ladies Antique Set</a>
-	<a href="la_pendant_set.html" class="menu-item menu-icon img">Ladies Pendant Set</a>			
-	<a href="#" id="sub-menu-two" class="menu-item menu-icon img">Ladies Mangalsutra<strong></strong></a>
-		<div class="sub-menu-two">
-			<a href="la_plain_mang.html" class="sub-menu-item">Ladies Plain Mangalsutra</a>
-			<a href="la_swarovski_mang.html" class="sub-menu-item">Ladies Swarovski Mangalsutra</a>
-		</div>
-	<a href="ladie_gent_ring.html" class="menu-item menu-icon img">Ladies With Gents Ring</a>
-	<a href="gift_pendant_chain.html" class="menu-item menu-icon img">Gift Pedant With Chain</a><a href="temple_jewellery.html" class="menu-item menu-icon img">Temple Jewellery</a>
-	<a href="#" class="menu-item menu-icon img" id="sub-menu-three">Kid's Corner<strong></strong></a>
-		<div class="sub-menu-three">
-			<a href="baby_pendant_chain.html" class="sub-menu-item">Baby Pendant With Chain</a>
-			<a href="bacha_kadli.html" class="sub-menu-item">Bacha Kadli</a>
-			<a href="bacha_ring.html" class="sub-menu-item">Bacha Ring</a>
-		</div>	
+    	
 	
     </div>
 </div>
