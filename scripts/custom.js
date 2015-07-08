@@ -97,7 +97,7 @@ var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 			var sub_cat_id=subcatg.sub_cat_id;
 			if(sub_cat_id==null)
 			{
-				sub_cat_id='abcd';
+				sub_cat_id='abcd'+subcatg.id;
 			}
 				
 				sub_cat_html += '<a class="sub-menu-item"  href="'+cat_url+subcatg.cat_id+'-'+sub_cat_id+'">'+subcatg.cat_name+'</a>';

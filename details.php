@@ -4,14 +4,30 @@
 $conn = mysqli_connect("localhost",'k2s2c_kolears','H@*&2871','k2s2c_kolears');
 
 $id=$_GET["id"];
+#echo $id;
+#echo '<hr>';
+$f_id='';
 if(strstr($id,'-'))
 {
 	$id_exp =explode('-',$id);
 	$cat_id=$id_exp[1];
-	if($cat_id==='abcd')
+	#$procat_id = 'abcd'.$id_exp[1];
+	#$fprocat_id = substr($procat_id,4);
+	#echo $cat_id;
+	if(strstr($cat_id,'abcd'))
 	{
+	#echo 'hi';
 		$cat_id=$id_exp[0];
+		#$pro_id=$id_exp[1];
 		$id=$id_exp[1];
+		$f_id=substr($id,0,4);
+		#echo $f_id;
+		#echo $id;
+		#echo '<hr>';
+		$pro_id=substr($id,4);
+		
+		/*echo $pro_id;
+		echo '<hr>';*/
 	}
 	
 	
@@ -19,8 +35,10 @@ if(strstr($id,'-'))
 else{
 $cat_id=$_GET["id"];
 $id='';
+
 }
 #echo $cat_id;
+
 #exit;
 
 ?>
@@ -82,9 +100,9 @@ $id='';
     <div class="container">
 	
 	<?php
-		if($id=='abcd' || $id=='')
+		if($f_id=='abcd')
 		{
-		$q2 = "select p_id, product_name,cat_id,sub_cat_id from product_master where cat_id='$cat_id' order by p_id";
+		$q2 = "select p_id, product_name,cat_id,sub_cat_id from product_master where p_id='$pro_id' order by p_id";
 			
 		}else
 		{#$q1 = "select cat_id,parent_cat_id,cat_name from  category where cat_id='$cat_id'";
