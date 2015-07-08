@@ -1,20 +1,27 @@
 <?php
 #include 'kolears/config.php';
-#$conn = mysqli_connect("localhost",'root','','tgc');
-$conn = mysqli_connect("localhost",'k2s2c_kolears','H@*&2871','k2s2c_kolears');
+$conn = mysqli_connect("localhost",'root','','tgc');
+#$conn = mysqli_connect("localhost",'k2s2c_kolears','H@*&2871','k2s2c_kolears');
 
 $id=$_GET["id"];
 if(strstr($id,'-'))
 {
 	$id_exp =explode('-',$id);
 	$cat_id=$id_exp[1];
+	if($cat_id==='null')
+	{
+		$cat_id=$id_exp[0];
+		$id=$id_exp[1];
+	}
+	
 	
 }
 else{
 $cat_id=$_GET["id"];
 $id='';
 }
-
+#echo $cat_id;
+#exit;
 
 ?>
 <!DOCTYPE html>
@@ -70,25 +77,35 @@ $id='';
     <div class="decoration"></div>
     
     <div class="container">
-	<?php #$q1 = "select cat_id,parent_cat_id,cat_name from  category where cat_id='$cat_id'";
+	
+	<?php
+		if($id=='null')
+		{
+		$q2 = "select p_id, product_name,cat_id,sub_cat_id from product_master where cat_id='$cat_id' order by p_id";
+			
+		}else
+		{#$q1 = "select cat_id,parent_cat_id,cat_name from  category where cat_id='$cat_id'";
 	$q2 = "select p_id, product_name,cat_id,sub_cat_id from product_master where cat_id='$cat_id' and sub_cat_id='$id' order by p_id";
+	}
 	#echo $q2;
 	#exit;
 	$result1 = mysqli_query($conn,$q2);
+	
 	
 	$title= '<h3 class="left-text">'.$cat_name.':&nbsp';
 	$linkimg = '';
 	#$path='http://localhost/tgc1/uploads/';
 	$path='http://k2s2c.in/kolears/uploads/';
-	
+
+
 	
 	while($row1 = mysqli_fetch_array($result1))
 	{
 		$prod_name =$row1['product_name'];
 		$p_id= $row1['p_id'];
 		
-		#$title1="<a href=\"#$prod_name\">$prod_name</a>,";
-		#$title1 ='subst'
+		$title1="<a href=\"#$prod_name\">$prod_name</a>,";
+		
 		$title.= "<a href=\"#$prod_name\">$prod_name</a>,";
 	$q2="select pimg_name,img_desc,p_img_id, p_id from product_imagemaster where p_id='$p_id' order by p_id";	
 		$resultimg = mysqli_query($conn,$q2);

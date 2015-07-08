@@ -33,7 +33,6 @@ var serviceURL = "http://localhost/android/kolears/";
 
 var category; 
 var sub_cat;
-
 //alert(serviceURL);
 //alert('hi');
 $('#catlist').on('click','.maincat',function()
@@ -44,12 +43,7 @@ $('#catlist').on('click','.maincat',function()
 
 getcategorylist();
 function getcategorylist() {
-	
-var cat_html;
-var sub_cat_html;
-var catg;
-var catname;
-var cat_order = [];
+var subcat_html;
 var cat_url ='http://localhost/android/Kolearsapp/details.php?id=';
 //var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 	$.getJSON(serviceURL + 'category.php', function(data) {
@@ -58,81 +52,52 @@ var cat_url ='http://localhost/android/Kolearsapp/details.php?id=';
 	//alert(category);
 	//console.log(category);
 	
-	
-	console.log('category:' + category);
-	
-	for (var i = 0; i < category.length; i++) {
-    (function(i) { // protects i in an immediately called
-	
-	
-		console.log('category[i]:' + category[i]);
-		var catg = category[i];
-
-		console.log('cat_id:' + catg.cat_id);
+	$.each(category, function(index, catg) {
+		 //var cat_html = '<a class="menu-item menu-icon img" id="sub-menu-one" href="#">'+catg.cat_name+'</a>';
 		
-		$.getJSON(serviceURL + 'subcategory.php?id='+catg.cat_id, function(data1){
+	$.getJSON(serviceURL + 'subcategory.php?id='+catg.cat_id, function(data1){
 			
-			var cat_html = '';
-	
-			 
-		
-			console.log('catg:' + catg.cat_name);
-			var catname = catg.cat_name;
+			sub_cat = data1.items;
+			//console.log(sub_cat);
+			//var cat_html = '<a class="menu-item menu-icon img" id="sub-menu-one" href="#">'+catg.cat_name+'</a>';
 			
-			var sub_cat = data1.items;
-			console.log('subcat' + sub_cat);
-			console.log(sub_cat);
-			console.log('subcat lengh:' + sub_cat.length);
-			
-			var sub_cat_html='';
-			
-			if(sub_cat.length >1)
-			{
-			
-			cat_html = '<a class="menu-item menu-icon img maincat" id="sub-menu-one" href="#">'+catname+'<strong></strong></a>';
-			
-			//cat_html += '<a class="menu-item menu-icon img" id="sub-menu-one" href="#">'+catg.cat_name+'<strong></strong></a>';
-			sub_cat_html = '<div class="sub-menu-one">';
+			if (sub_cat.length !==0) {
+			var cat_html = '<a class="menu-item menu-icon img maincat" id="sub-menu-one"  href="#">'+catg.cat_name+'<strong></strong></a>';
+				
+			//cat_html+='<strong></strong>';
+			subcat_html = '<div class="sub-menu-one">';
 			$.each(sub_cat, function(index, subcatg) {
-				
-				sub_cat_html += '<a class="sub-menu-item"  href="'+cat_url+subcatg.cat_id+'-'+subcatg.sub_cat_id+'">'+subcatg.cat_name+'</a>';
-				
+			
+			subcat_html += '<a href="'+cat_url+subcatg.cat_id+'-'+subcatg.parent_cat_id+'" class="sub-menu-item">'+subcatg.cat_name+'</a>';
+			
 			
 			});
-			sub_cat_html += '</div>';	
-			//console.log('subcat:' + sub_cat_html);
-			}
-			else
-			{
-			cat_html = '<a class="menu-item menu-icon img maincat" id="sub-menu-one" href="'+cat_url+catg.cat_id+'">'+catname+'</a>';
-			}
 			
+			subcat_html += '</div>';
 			
-			cat_html += sub_cat_html;
-			$('#catlist').append( cat_html );	
-			
-			//cat_order[] = cat_html;
-			
-			cat_order.push( cat_html);
-			
-			console.log( 'cat_order:' );
-			console.log( cat_order );
-			
+}
+else{
+subcat_html = '';
+var cat_html = '<a class="menu-item menu-icon img" id="sub-menu-one" href="'+cat_url+catg.cat_id+'">'+catg.cat_name+'</a>';
+
+}
+		//console.log(subcat_html);
+		//cat_html += subcat_html;
+		var fcat = cat_html+subcat_html;
+		console.log(fcat);
+		$('#catlist').append(fcat);
 		});
 		
-	
-	})(i);
-}
-
-
 		
-		
-		
-		
-		
+		//alert(cat_html);
 		
 	});
+	
+	 
 
+	
+		
+	});
 }
 function getprodcutdetails()
 {
