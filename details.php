@@ -1,14 +1,14 @@
 <?php
 #include 'kolears/config.php';
-$conn = mysqli_connect("localhost",'root','','tgc');
-#$conn = mysqli_connect("localhost",'k2s2c_kolears','H@*&2871','k2s2c_kolears');
+#$conn = mysqli_connect("localhost",'root','','kolears');
+$conn = mysqli_connect("localhost",'k2s2c_kolears','H@*&2871','k2s2c_kolears');
 
 $id=$_GET["id"];
 if(strstr($id,'-'))
 {
 	$id_exp =explode('-',$id);
 	$cat_id=$id_exp[1];
-	if($cat_id==='null')
+	if($cat_id==='abcd')
 	{
 		$cat_id=$id_exp[0];
 		$id=$id_exp[1];
@@ -59,13 +59,16 @@ $id='';
     	<a href="#" class="deploy-nav header-icon"></a>
         <a href="#" class="hide-nav header-icon-active"></a>
 		<?php $q1 = "select cat_id,parent_cat_id,cat_name from  category where cat_id='$cat_id'";
+		//echo $q1;
+		#exit;
 	$result = mysqli_query($conn,$q1);
 	
-	while($row = mysqli_fetch_array($result))
+	while($row = $result->fetch_assoc())
 	{
 		$cat_name =$row['cat_name'];
-		
+			
 	}
+ 
 		
 	?>
     	<h1 class="page-title-small"><?php echo $cat_name; ?></h1>
@@ -79,7 +82,7 @@ $id='';
     <div class="container">
 	
 	<?php
-		if($id=='null')
+		if($id=='abcd' || $id=='')
 		{
 		$q2 = "select p_id, product_name,cat_id,sub_cat_id from product_master where cat_id='$cat_id' order by p_id";
 			

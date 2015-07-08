@@ -49,7 +49,7 @@ var cat_html;
 var sub_cat_html;
 var catg;
 var catname;
-var cat_order = [];
+//var cat_order = [];
 //var cat_url ='http://localhost/android/Kolearsapp/details.php?id=';
 var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 	$.getJSON(serviceURL + 'category.php', function(data) {
@@ -76,13 +76,13 @@ var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 	
 			 
 		
-			console.log('catg:' + catg.cat_name);
+			//console.log('catg:' + catg.cat_name);
 			var catname = catg.cat_name;
 			
 			var sub_cat = data1.items;
-			console.log('subcat' + sub_cat);
-			console.log(sub_cat);
-			console.log('subcat lengh:' + sub_cat.length);
+			//console.log('subcat' + sub_cat);
+			//console.log(sub_cat);
+			//console.log('subcat lengh:' + sub_cat.length);
 			
 			var sub_cat_html='';
 			
@@ -94,8 +94,13 @@ var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 			//cat_html += '<a class="menu-item menu-icon img" id="sub-menu-one" href="#">'+catg.cat_name+'<strong></strong></a>';
 			sub_cat_html = '<div class="sub-menu-one">';
 			$.each(sub_cat, function(index, subcatg) {
+			var sub_cat_id=subcatg.sub_cat_id;
+			if(sub_cat_id==null)
+			{
+				sub_cat_id='abcd';
+			}
 				
-				sub_cat_html += '<a class="sub-menu-item"  href="'+cat_url+subcatg.cat_id+'-'+subcatg.sub_cat_id+'">'+subcatg.cat_name+'</a>';
+				sub_cat_html += '<a class="sub-menu-item"  href="'+cat_url+subcatg.cat_id+'-'+sub_cat_id+'">'+subcatg.cat_name+'</a>';
 				
 			
 			});
