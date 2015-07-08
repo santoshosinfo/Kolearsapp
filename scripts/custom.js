@@ -27,9 +27,9 @@
 
 
 $(document).ready(function(){
-//var serviceURL = "http://k2s2c.in/kolears/services/";
+var serviceURL = "http://k2s2c.in/kolears/services/";
 //var serviceURL = "http://santosh.phpzeal.com/kolears/";
-var serviceURL = "http://localhost/android/kolears/";
+//var serviceURL = "http://localhost/android/kolears/";
 
 var category; 
 var sub_cat;
@@ -50,8 +50,8 @@ var sub_cat_html;
 var catg;
 var catname;
 var cat_order = [];
-var cat_url ='http://localhost/android/Kolearsapp/details.php?id=';
-//var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
+//var cat_url ='http://localhost/android/Kolearsapp/details.php?id=';
+var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 	$.getJSON(serviceURL + 'category.php', function(data) {
 	//alert(data);
 	category = data.items;
