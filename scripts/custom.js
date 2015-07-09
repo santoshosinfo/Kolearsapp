@@ -49,7 +49,9 @@ var cat_html;
 var sub_cat_html;
 var catg;
 var catname;
-//var cat_order = [];
+var cat_order = [];
+var counter;
+
 //var cat_url ='http://localhost/android/Kolearsapp/details.php?id=';
 var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 	$.getJSON(serviceURL + 'category.php', function(data) {
@@ -65,16 +67,17 @@ var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
     (function(i) { // protects i in an immediately called
 	
 	
-		console.log('category[i]:' + category[i]);
+	
+		console.log('category[i]:' + category[i].toSource()  );
 		var catg = category[i];
 
-		console.log('cat_id:' + catg.cat_id);
+		
 		
 		$.getJSON(serviceURL + 'subcategory.php?id='+catg.cat_id, function(data1){
 			
 			var cat_html = '';
 	
-			 
+		console.log('response category[i]:' + category[i].toSource()  ); 
 		
 			//console.log('catg:' + catg.cat_name);
 			var catname = catg.cat_name;
@@ -114,14 +117,32 @@ var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 			
 			
 			cat_html += sub_cat_html;
-			$('#catlist').append( cat_html );	
+			//$('#catlist').append( cat_html );	
 			
-			//cat_order[] = cat_html;
+			cat_order[ catg.cat_id ] = cat_html;
 			
-			cat_order.push( cat_html);
 			
+			//cat_order.push( cat_html );
+			counter = i;
 			console.log( 'cat_order:' );
 			console.log( cat_order );
+			
+			console.log( 'counter:' );
+			console.log( counter );
+			console.log( category.length );
+			
+			if( counter == ( category.length - 1 ) )
+			{
+				console.log(  'final array:' );
+		
+				$.each(cat_order, function( index, value ) {
+					
+				  console.log( index + '-' + value );
+				  if( value != '' )
+					  $('#catlist').append( value );	
+				  
+				});	
+			}
 			
 		});
 		
@@ -129,7 +150,7 @@ var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 	})(i);
 }
 
-
+	
 		
 		
 		
