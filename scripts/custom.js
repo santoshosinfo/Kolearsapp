@@ -61,14 +61,14 @@ var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 	//console.log(category);
 	
 	
-	console.log('category:' + category);
+	//console.log('category:' + category);
 	
 	for (var i = 0; i < category.length; i++) {
     (function(i) { // protects i in an immediately called
 	
 	
 	
-		console.log('category[i]:' + category[i].toSource()  );
+		//console.log('category[i]:' + category[i].toSource()  );
 		var catg = category[i];
 
 		
@@ -77,7 +77,7 @@ var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 			
 			var cat_html = '';
 	
-		console.log('response category[i]:' + category[i].toSource()  ); 
+		//console.log('response category[i]:' + category[i].toSource()  ); 
 		
 			//console.log('catg:' + catg.cat_name);
 			var catname = catg.cat_name;
@@ -124,20 +124,20 @@ var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 			
 			//cat_order.push( cat_html );
 			counter = i;
-			console.log( 'cat_order:' );
-			console.log( cat_order );
+			//console.log( 'cat_order:' );
+			//console.log( cat_order );
 			
-			console.log( 'counter:' );
-			console.log( counter );
-			console.log( category.length );
+			//console.log( 'counter:' );
+			//console.log( counter );
+			//console.log( category.length );
 			
 			if( counter == ( category.length - 1 ) )
 			{
-				console.log(  'final array:' );
+				//console.log(  'final array:' );
 		
 				$.each(cat_order, function( index, value ) {
 					
-				  console.log( index + '-' + value );
+				 // console.log( index + '-' + value );
 				  if( value != '' )
 					  $('#catlist').append( value );	
 				  
@@ -160,7 +160,7 @@ var cat_url='http://k2s2c.in/kolears/services/app/details.php?id=';
 	});
 
 }
-function getprodcutdetails()
+/*function getprodcutdetails()
 {
 	var imgURL = "http://localhost/tgc1/uploads/";
 	$.getJSON(serviceURL + 'subcategoryproduct.php', function(data) {
@@ -194,8 +194,8 @@ function getprodcutdetails()
 	
 	
 	
-}
-function getonecatdetails()
+}*/
+/*function getonecatdetails()
 {
 	$.getJSON(serviceURL + 'onecategory.php',function(data) {
 	onecategory = data.items;
@@ -210,7 +210,7 @@ function getonecatdetails()
 	});
 	
 	
-}
+}*/
 function getUrlVars() {
     var vars = [], hash;
     var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
